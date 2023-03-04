@@ -2,12 +2,15 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const db = new sqlite3.Database("E:\\order\\Survey.db");
+
+const dbPath = path.resolve(__dirname, "Survey.db");
+const db = new sqlite3.Database(dbPath);
 
 app.get("/api/get/tblCountry", (req, res) => {
   db.all(
